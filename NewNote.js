@@ -1,42 +1,9 @@
 
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  Alert, 
-  Button, TextInput, ScrollView
+import { Platform, StyleSheet, Text, View, Alert, Button, TextInput, ScrollView
 } from 'react-native';
 import Files from './Files.js';
 import { StackNavigator } from 'react-navigation';
-
-// class LogoTitle extends React.Component {
-//   constructor(props) {
-//     super(props);
-
-//     this.onButtonPress = this.onButtonPress.bind(this);
-//   }
-
-// onButtonPress() {
-//     this.props.navigation.navigate('Files');
-// }
-
-//   render() {
-//     return (
-//       <View style={styles.topbar}>
-//         <View style={styles.topbarEle}>
-//           <Button style={styles.topbarBut} title="back" onPress={this.onButtonPress} />
-//         </View>
-//         <View style={styles.topbarEle}>
-//           <Text style={styles.welcome}> Jot </Text>
-//         </View>
-//         <View style={styles.topbarEle}></View>
-//       </View>
-//     );
-//   }
-// }
-
 
 export default class NewNote extends React.Component {
 
@@ -48,25 +15,44 @@ export default class NewNote extends React.Component {
     }
   }
 
-  static navigationOptions = ({navigation}) => ({
-    title: 'Jot',
-    headerStyle: {
-      backgroundColor: '#b3e4f9',
-    },
-    headerLeft: (
-      <Button
-        onPress={() => navigation.navigate('Files')}
-        title="back"
-        color="#173566"
-      />
-    ),
-  });
+  static navigationOptions = ({navigation}) => {
+    const params = navigation.state.params || {};
+    return {
+        title: 'Jot',
+        headerStyle: {
+        backgroundColor: '#b3e4f9',
+        },
+        headerLeft: (
+        <Button onPress={() => navigation.navigate('Files')}
+            title="my files" color="#173566" />
+        ),
+        headerRight: (
+            <Button onPress={params.postNote}
+            title="save" color="#173566" />
+        ),}
+  };
+
+  componentWillMount() {
+    this.props.navigation.setParams({ postNote: this._postNote });
+  }
+
+  _postNote = () => {
+    // fetch('https://mywebsite.com/endpoint/', {
+    //     method: 'POST',
+    //     headers: {
+    //         Accept: 'application/json',
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //         firstParam: 'yourValue',
+    //         secondParam: 'yourOtherValue',
+    //     }),
+    //     });
+  };
 
   render() {
     return (
       <View style={styles.container}>
-        
-
         <ScrollView>
           <View style={styles.textBox}>
             <TextInput
@@ -90,29 +76,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-
-  },
-  topbar: {
-    height: 80,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor:'#b3e4f9',
-
-  },
-  topbarEle: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  topbarBut: {
-    backgroundColor: '#173566',
-    width: 10,
   },
   textBox: {
     flex: 1,
