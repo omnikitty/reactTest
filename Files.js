@@ -18,7 +18,7 @@ export default class Files extends React.Component {
     headerRight: (
       <Button
         onPress={() => navigation.navigate('Home')}
-        title="+"
+        title="new note"
         color="#173566"
         fontSize="50"
       />
@@ -32,16 +32,18 @@ export default class Files extends React.Component {
     this.state = {
       text: "Jot something down"
     }
-
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView>
-          <View style={styles.textBox}>
-            <Text>This is a new page, where a list of files appears</Text>
-          </View>
+        <ScrollView contentContainerStyle={styles.container}>
+          <View style={styles.file}/>
+          <View style={styles.file}/>
+          <View style={styles.file}/>
+          <View style={styles.file}/>
+          <View style={styles.file}/>
+          <View style={styles.file}/>
         </ScrollView>
       </View>
     );
@@ -52,35 +54,15 @@ export default class Files extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'stretch',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-
-  },
-  topbar: {
-    height: 60,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor:'#b3e4f9',
-    marginBottom: 5,
-  },
-  topbarEle: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  topbarBut: {
-    backgroundColor: '#173566',
-    width: 10,
-  },
-  textBox: {
-    flex: 1,
-    padding: 15,
+  file: {
+    width: 80,
+    height: 100,
+    margin: 20,
+    backgroundColor: 'skyblue'
   }
 });

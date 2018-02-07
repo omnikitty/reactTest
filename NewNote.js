@@ -56,7 +56,7 @@ export default class NewNote extends React.Component {
     headerLeft: (
       <Button
         onPress={() => navigation.navigate('Files')}
-        title="Back"
+        title="back"
         color="#173566"
       />
     ),
